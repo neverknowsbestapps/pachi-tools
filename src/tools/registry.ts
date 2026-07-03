@@ -10,4 +10,11 @@ export const tools: Feature[] = [
     description: '台番号ごとのトロフィー（0〜6）を表で記録・共有',
     category: 'tools',
   },
+  {
+    id: 'pachi-count',
+    title: 'パチカウント',
+    description: '遊技中に回転数を記録して回転率を計算',
+    category: 'tools',
+    href: 'https://neverknowsbestapps.github.io/rotation-counter/',
+  },
 ]
