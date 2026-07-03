@@ -1,0 +1,295 @@
+.trophy h1 {
+  margin: 0 0 12px;
+}
+
+/* セクション（表 / 設定 / テキスト出力） */
+.trophy-section {
+  margin-top: 20px;
+}
+
+.trophy-section-title {
+  margin: 0 0 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+  font-size: 1.05rem;
+}
+
+/* 設定パネル */
+.trophy-config {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+}
+
+/* トグル群（横並び・折り返し） */
+.toggle-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+/* 単体ボタン（全消去など） */
+.ghost-btn {
+  min-height: 40px;
+  padding: 8px 14px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--accent);
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.mode-toggle {
+  display: inline-flex;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.mode-toggle button {
+  border: 0;
+  background: var(--surface);
+  color: var(--muted);
+  padding: 8px 14px;
+  min-height: 40px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.mode-toggle button.active {
+  background: var(--accent);
+  color: #fff;
+}
+
+.config-hint {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* 操作ボタン */
+.trophy-actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.trophy-actions button {
+  min-height: 40px;
+  padding: 8px 14px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.trophy-actions button.ghost {
+  background: transparent;
+  color: var(--accent);
+}
+
+/* テキスト出力パネル */
+.text-output {
+  margin-bottom: 12px;
+}
+
+.text-output-area {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #fff;
+  color: var(--text);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.85rem;
+  white-space: pre;
+}
+
+.text-output-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.text-output-actions button {
+  min-height: 38px;
+  padding: 8px 14px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.text-output-actions button.ghost {
+  background: transparent;
+  color: var(--accent);
+}
+
+.copied-msg {
+  color: var(--accent);
+  font-size: 0.85rem;
+}
+
+/* 表：横スクロール可。台番号列とヘッダー行は固定 */
+.trophy-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.trophy-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.9rem;
+}
+
+.trophy-table th,
+.trophy-table td {
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 4px 6px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.trophy-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #eef1f6;
+  font-weight: 600;
+}
+
+/* 列見出し（回転数の値 or 時間プルダウン）＋ 列削除ボタン */
+.col-head {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.col-head .head-select {
+  padding: 2px 4px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  font-size: 0.85rem;
+}
+
+.col-head .col-del {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* 端に置く「追加」ボタン */
+.add-btn {
+  min-height: 34px;
+  padding: 4px 12px;
+  border: 1px dashed var(--accent);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--accent);
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.trophy-table th.add-col {
+  background: #eef1f6;
+}
+
+.trophy-table td.add-col-cell {
+  background: var(--surface);
+}
+
+.trophy-table td.add-row-cell {
+  position: sticky;
+  left: 0;
+  padding: 8px;
+  text-align: left;
+  background: var(--surface);
+}
+
+/* 左端の見出し列（台番号 or 回転数/時間）を固定 */
+.trophy-table .corner,
+.trophy-table td.rowhead {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--surface);
+}
+
+.trophy-table thead .corner {
+  z-index: 3; /* 左上の角は両方向で最前面 */
+  background: #eef1f6;
+}
+
+.trophy-table td.rowhead {
+  min-width: 84px;
+}
+
+/* 台番号セル（入力＋削除） */
+.dai-head {
+  display: inline-flex;
+  align-items: center;
+}
+
+.dai-input {
+  width: 52px;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.trophy-table .del {
+  margin-left: 4px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.trophy-table td select {
+  min-width: 44px;
+  min-height: 34px;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  font-size: 0.9rem;
+}
+
+/* 使い方 */
+.help-list {
+  margin: 0;
+  padding-left: 1.2em;
+  color: var(--text);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.help-list ul {
+  margin: 4px 0;
+  padding-left: 1.2em;
+}
+
+.help-list b {
+  font-weight: 600;
+}
