@@ -1,0 +1,314 @@
+.bda h1 {
+  margin: 0 0 4px;
+}
+
+/* サマリ＋一括操作 */
+.bda-panel {
+  margin: 16px 0;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.bda-summary {
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+}
+
+.bda-summary b {
+  color: var(--accent);
+  font-size: 1.1rem;
+}
+
+.bda-bulk {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.bda-bulk button {
+  min-height: 36px;
+  padding: 6px 12px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.bda-bulk button.ghost {
+  background: transparent;
+  color: var(--accent);
+}
+
+/* フィルタ */
+.bda-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.bda-filters label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.bda-filters select,
+.bda-filters input {
+  min-height: 38px;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.bda-filters input[type='search'] {
+  flex: 1;
+  min-width: 160px;
+}
+
+/* 機種ごとのグループ */
+.bda-group {
+  margin-bottom: 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 10px 12px;
+}
+
+.bda-group-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.bda-group-title {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.bda-group-count {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.bda-mini {
+  min-height: 30px;
+  padding: 3px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--text);
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.bda-mini:last-of-type {
+  margin-left: -2px;
+}
+
+.bda-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2px 10px;
+}
+
+.bda-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.bda-item-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1 1 auto;
+  padding: 5px 6px;
+  border-radius: var(--radius);
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+
+.bda-item-label input {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+}
+
+.bda-name {
+  flex: 1 1 auto;
+  color: var(--muted);
+}
+
+.bda-item.on .bda-name {
+  color: var(--text);
+}
+
+.bda-custom {
+  margin-left: 6px;
+  padding: 0 5px;
+  border-radius: 4px;
+  background: #eef2fe;
+  color: #2a45a8;
+  font-size: 0.68rem;
+  vertical-align: middle;
+}
+
+.bda-date {
+  flex: 0 0 auto;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.bda-del {
+  flex: 0 0 auto;
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* キャラ追加フォーム */
+.bda-add {
+  margin: 16px 0;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.bda-add-title {
+  margin: 0 0 10px;
+  font-size: 1.05rem;
+}
+
+.bda-add-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.bda-add-form input[type='text'] {
+  min-height: 38px;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.bda-add-form input[type='text']:first-child {
+  flex: 1 1 140px;
+}
+
+.bda-add-form input[type='text']:nth-child(2) {
+  flex: 1 1 160px;
+}
+
+.bda-add-form select {
+  min-height: 38px;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  font-size: 0.9rem;
+}
+
+.bda-add-form button {
+  min-height: 38px;
+  padding: 8px 18px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.bda-add-error {
+  margin: 8px 0 0;
+  color: #d0455b;
+  font-size: 0.85rem;
+}
+
+.bda-add-note {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+/* エクスポート */
+.bda-export {
+  margin-top: 24px;
+}
+
+.bda-export-title {
+  margin: 0 0 6px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+  font-size: 1.05rem;
+}
+
+.bda-export-note {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.bda-export-area {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #fff;
+  color: var(--text);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.8rem;
+  white-space: pre;
+}
+
+.bda-export-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.bda-export-actions button {
+  min-height: 38px;
+  padding: 8px 16px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.bda-copied {
+  color: var(--accent);
+  font-size: 0.85rem;
+}
+
+.bda-help {
+  margin-top: 24px;
+}

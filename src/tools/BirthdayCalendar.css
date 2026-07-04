@@ -1,0 +1,350 @@
+.bd h1 {
+  margin: 0 0 4px;
+}
+
+/* 表示切替＋機種フィルタ */
+.bd-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.bd-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.bd-filter select {
+  min-height: 38px;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text);
+  font-size: 0.9rem;
+  max-width: 60vw;
+}
+
+/* 管理ページへのリンク */
+.bd-admin-link {
+  margin: 8px 0 0;
+}
+
+.bd-admin-link a {
+  color: var(--accent);
+  font-size: 0.9rem;
+}
+
+/* 機種フィルタ（展開式チェックボックス） */
+.bd-machine-filter {
+  margin-bottom: 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 10px 12px;
+}
+
+.bd-machine-filter > summary {
+  cursor: pointer;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.bd-machine-actions {
+  display: flex;
+  gap: 8px;
+  margin: 10px 0 8px;
+}
+
+.bd-machine-actions button {
+  min-height: 32px;
+  padding: 4px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--text);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.bd-machine-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 2px 10px;
+}
+
+.bd-machine-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 6px;
+  border-radius: var(--radius);
+  font-size: 0.88rem;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.bd-machine-item.on {
+  color: var(--text);
+}
+
+.bd-machine-item input {
+  width: 16px;
+  height: 16px;
+}
+
+/* 月移動バー */
+.bd-monthbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.bd-navbtn {
+  min-width: 40px;
+  min-height: 40px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.bd-monthlabel {
+  min-width: 128px;
+  text-align: center;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.bd-today {
+  margin-left: auto;
+  min-height: 40px;
+  padding: 8px 14px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--accent);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.bd-today:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* カレンダーグリッド（7列） */
+.bd-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.bd-wday {
+  text-align: center;
+  padding: 4px 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.bd-wday.sun {
+  color: #d0455b;
+}
+
+.bd-wday.sat {
+  color: #2f6ad0;
+}
+
+.bd-cell {
+  min-height: 76px;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.bd-cell.empty {
+  background: transparent;
+  border-color: transparent;
+}
+
+.bd-cell.today {
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.bd-daynum {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.2;
+}
+
+.bd-cell.today .bd-daynum {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.bd-chips {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 2px;
+}
+
+.bd-chip {
+  display: block;
+  padding: 1px 4px;
+  border-radius: 5px;
+  background: #eef2fe;
+  color: #2a45a8;
+  font-size: 0.68rem;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+/* 少し広い画面ではセルを高く、文字も少し大きく */
+@media (min-width: 560px) {
+  .bd-cell {
+    min-height: 92px;
+  }
+  .bd-chip {
+    font-size: 0.75rem;
+  }
+}
+
+/* 一覧表示 */
+.bd-list-month {
+  margin-top: 16px;
+}
+
+.bd-list-mlabel {
+  margin: 0 0 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--border);
+  font-size: 1rem;
+}
+
+.bd-list-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bd-list-items li {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 8px 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.bd-date {
+  flex: 0 0 auto;
+  min-width: 44px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.bd-name {
+  flex: 1 1 auto;
+  font-size: 0.95rem;
+}
+
+.bd-machine {
+  flex: 0 0 auto;
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-align: right;
+}
+
+/* 対象機種（TOP30）の折りたたみ */
+.bd-top30 {
+  margin-top: 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 10px 12px;
+}
+
+.bd-top30 > summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--text);
+}
+
+.bd-top30-list {
+  margin: 12px 0 4px;
+  padding-left: 0;
+  list-style: none;
+  counter-reset: none;
+}
+
+.bd-top30-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 3px 0;
+  font-size: 0.85rem;
+  border-bottom: 1px dashed var(--border);
+}
+
+.bd-top30-list li.no-data {
+  color: var(--muted);
+}
+
+.bd-top30-mark {
+  flex: 0 0 auto;
+  width: 1.2em;
+  text-align: center;
+}
+
+.bd-top30-list li.has-data .bd-top30-mark {
+  color: var(--accent);
+}
+
+.bd-top30-name {
+  flex: 1 1 auto;
+}
+
+.bd-top30-count {
+  flex: 0 0 auto;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.bd-top30-note {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+/* 使い方 */
+.bd-help {
+  margin-top: 28px;
+}
+
+.bd-help-title {
+  margin: 0 0 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+  font-size: 1.05rem;
+}

@@ -17,4 +17,16 @@ export const tools: Feature[] = [
     category: 'tools',
     href: 'https://neverknowsbestapps.github.io/rotation-counter/',
   },
+  {
+    id: 'birthday-calendar',
+    title: 'スロット誕生日カレンダー',
+    description: 'スロット登場キャラの誕生日をカレンダー・一覧で表示',
+    category: 'tools',
+  },
+  {
+    id: 'birthday-admin',
+    title: '誕生日カレンダー：表示設定',
+    description: 'カレンダーに載せる登場キャラをチェックで選択（この端末に保存）',
+    category: 'tools',
+  },
 ]
