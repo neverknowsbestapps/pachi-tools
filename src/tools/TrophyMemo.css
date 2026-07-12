@@ -247,6 +247,52 @@
   align-items: center;
 }
 
+/* 入替モードの左右移動ボタン（‹ ›） */
+.row-move {
+  display: inline-flex;
+  flex-direction: column;
+  margin-right: 2px;
+}
+
+.row-move .move-btn {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.72rem;
+  line-height: 1.05;
+  padding: 0 3px;
+  cursor: pointer;
+}
+
+.row-move .move-btn:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+/* 通常モードのドラッグ用グリップ */
+.drag-handle {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1;
+  padding: 0 4px;
+  margin-right: 2px;
+  cursor: grab;
+  touch-action: none; /* タッチでのドラッグ中にスクロールさせない */
+  user-select: none;
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+}
+
+/* ドラッグ中の行をハイライト（sticky セルの背景も上書き） */
+.trophy-table tr.dragging td,
+.trophy-table tr.dragging td.rowhead {
+  background: #eef2fe;
+}
+
 .dai-input {
   width: 52px;
   padding: 4px;

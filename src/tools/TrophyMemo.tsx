@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from 'react'
 import { Link } from 'react-router-dom'
 import './TrophyMemo.css'
 
@@ -110,6 +110,8 @@ const displayCount = (c: string) => (c === '' ? '-' : c)
 const displayDai = (d: string) => (d === '' ? '-' : d)
 const displayTrophy = (value: string, mode: TrophyMode) => {
   const v = TROPHY_VALUES.find((x) => x.value === value) ?? TROPHY_VALUES[0]
+  // テキスト出力では「なし」は N で表す（画面のプルダウン表示は「なし」のまま）
+  if (v.value === 'none') return 'N'
   return mode === 'num' ? v.num : v.emoji
 }
 
@@ -211,6 +213,65 @@ export function TrophyMemo() {
       return { ...s, rows: s.rows.filter((r) => r.id !== id), cells }
     })
 
+  // 台番号の行（＝データ上の rows）を1つ上/下（入替時は左/右）に移動（入替モードのボタン用）
+  const moveRow = (id: string, dir: 'up' | 'down') =>
+    setState((s) => {
+      const idx = s.rows.findIndex((r) => r.id === id)
+      const j = dir === 'up' ? idx - 1 : idx + 1
+      if (idx < 0 || j < 0 || j >= s.rows.length) return s
+      const rows = s.rows.slice()
+      ;[rows[idx], rows[j]] = [rows[j], rows[idx]]
+      return { ...s, rows }
+    })
+
+  // --- 行のドラッグ並べ替え（通常モード・マウス/タッチ共通のポインターイベント）---
+  const draggingRef = useRef<string | null>(null)
+  const rowRefs = useRef(new Map<string, HTMLTableRowElement>())
+  const [dragId, setDragId] = useState<string | null>(null)
+
+  // ポインターのY座標に応じて、掴んでいる行を挿入する位置を計算して並べ替え
+  const reorderByPointer = (y: number) =>
+    setState((s) => {
+      const id = draggingRef.current
+      const dragged = s.rows.find((r) => r.id === id)
+      if (!dragged) return s
+      const others = s.rows.filter((r) => r.id !== id)
+      let insertAt = others.length
+      for (let i = 0; i < others.length; i++) {
+        const el = rowRefs.current.get(others[i].id)
+        if (!el) continue
+        const rect = el.getBoundingClientRect()
+        if (y < rect.top + rect.height / 2) {
+          insertAt = i
+          break
+        }
+      }
+      const next = [...others.slice(0, insertAt), dragged, ...others.slice(insertAt)]
+      if (next.every((r, i) => r.id === s.rows[i].id)) return s
+      return { ...s, rows: next }
+    })
+
+  const startDrag = (e: ReactPointerEvent, id: string) => {
+    if (e.pointerType === 'mouse' && e.button !== 0) return
+    e.currentTarget.setPointerCapture(e.pointerId)
+    draggingRef.current = id
+    setDragId(id)
+  }
+  const onDragMove = (e: ReactPointerEvent) => {
+    if (!draggingRef.current) return
+    e.preventDefault() // タッチ時のスクロールを抑止
+    reorderByPointer(e.clientY)
+  }
+  const endDrag = (e: ReactPointerEvent) => {
+    try {
+      e.currentTarget.releasePointerCapture(e.pointerId)
+    } catch {
+      /* noop */
+    }
+    draggingRef.current = null
+    setDragId(null)
+  }
+
   const setDai = (id: string, value: string) =>
     setState((s) => ({
       ...s,
@@ -271,26 +332,67 @@ export function TrophyMemo() {
   }
 
   // --- セル・見出しの描画部品（向きが変わっても中身は共通） ---
-  const renderDaiHead = (row: Row) => (
-    <span className="dai-head">
-      <input
-        className="dai-input"
-        inputMode="numeric"
-        value={row.dai}
-        placeholder="-"
-        maxLength={4}
-        onChange={(e) => setDai(row.id, e.target.value)}
-      />
-      <button
-        type="button"
-        className="del"
-        aria-label="この台番号を削除"
-        onClick={() => removeRow(row.id)}
-      >
-        ×
-      </button>
-    </span>
-  )
+  const renderDaiHead = (row: Row) => {
+    const idx = state.rows.findIndex((r) => r.id === row.id)
+    const isFirst = idx <= 0
+    const isLast = idx === state.rows.length - 1
+    return (
+      <span className="dai-head">
+        {swap ? (
+          // 入替モードは横並びのため ‹ › ボタンで左右に移動
+          <span className="row-move">
+            <button
+              type="button"
+              className="move-btn"
+              aria-label="左へ移動"
+              disabled={isFirst}
+              onClick={() => moveRow(row.id, 'up')}
+            >
+              ‹
+            </button>
+            <button
+              type="button"
+              className="move-btn"
+              aria-label="右へ移動"
+              disabled={isLast}
+              onClick={() => moveRow(row.id, 'down')}
+            >
+              ›
+            </button>
+          </span>
+        ) : (
+          // 通常モードはグリップをドラッグで並べ替え
+          <button
+            type="button"
+            className="drag-handle"
+            aria-label="ドラッグで行を並べ替え"
+            onPointerDown={(e) => startDrag(e, row.id)}
+            onPointerMove={onDragMove}
+            onPointerUp={endDrag}
+            onPointerCancel={endDrag}
+          >
+            ⠿
+          </button>
+        )}
+        <input
+          className="dai-input"
+          inputMode="numeric"
+          value={row.dai}
+          placeholder="-"
+          maxLength={4}
+          onChange={(e) => setDai(row.id, e.target.value)}
+        />
+        <button
+          type="button"
+          className="del"
+          aria-label="この台番号を削除"
+          onClick={() => removeRow(row.id)}
+        >
+          ×
+        </button>
+      </span>
+    )
+  }
 
   const renderValueHead = (col: Column) => (
     <span className="col-head">
@@ -393,7 +495,14 @@ export function TrophyMemo() {
               </thead>
               <tbody>
                 {state.rows.map((row) => (
-                  <tr key={row.id}>
+                  <tr
+                    key={row.id}
+                    ref={(el) => {
+                      if (el) rowRefs.current.set(row.id, el)
+                      else rowRefs.current.delete(row.id)
+                    }}
+                    className={dragId === row.id ? 'dragging' : undefined}
+                  >
                     <td className="rowhead">{renderDaiHead(row)}</td>
                     {state.columns.map((col) => (
                       <td key={col.id}>{renderCell(row, col)}</td>
@@ -518,6 +627,12 @@ export function TrophyMemo() {
           <li>台番号（4桁）を入力し、各マスでトロフィー（数字）を選びます。</li>
           <li>
             表のふちの <b>＋</b> で行・列を追加、<b>×</b> で削除できます。
+          </li>
+          <li>
+            台番号のよこの <b>⠿</b> をドラッグで行を並べ替えできます（行列入替時は <b>‹ ›</b> ボタン）。
+          </li>
+          <li>
+            テキスト出力では「なし」は <b>N</b> で表示されます。
           </li>
           <li>
             設定の切り替え：
